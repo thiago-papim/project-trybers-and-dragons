@@ -12,18 +12,16 @@ class PVE extends Battle {
     return this._arrMonster;
   }
 
-  // fight(): number {
-  //   for (let i = 0; i < this._arrMonster.length; i += 1) {
-  //     while (this.player.lifePoints !== -1) {
-  //       this.player.attack(this.arrMonster[i]);
-  //       this.arrMonster[i].attack(this.player);
-  //       if (this.arrMonster[i].lifePoints === -1) {
-  //         break;
-  //       }
-  //     }
-  //   }
-  //   return super.fight();
-  // }
+  fight(): number {
+    while (this._arrMonster.every((e) => e.lifePoints !== -1)
+    && this.player.lifePoints !== -1) {
+      this._arrMonster.forEach((e) => {
+        e.attack(this.player);
+        this.player.attack(e);
+      });
+    }
+    return super.fight();
+  }
 }
 
 export default PVE;
